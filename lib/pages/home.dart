@@ -8,13 +8,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List swiperDataList = [
+    "images/banner/a1.jpg",
+    "images/banner/a2.jpg",
+    "images/banner/a3.jpg",
+    "images/banner/a4.jpg"
+  ].cast();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('霍小叶电商项目'),
         ),
-        body: FutureBuilder(
+        body: Column(
+          children: <Widget>[
+            SwiperDiy(swiperDataList), //页面顶部轮播组件
+          ],
+        ));
+  }
+}
+
+/*
+
+FutureBuilder(
           future: getHomePageContent(),
           builder: (context, snapshot) {
             List swiperDataList = [
@@ -29,23 +45,22 @@ class _HomePageState extends State<HomePage> {
               ],
             );
           },
-        ));
-  }
-}
+        ),
+
+
+*/
 
 // 首页轮播组件编写
 class SwiperDiy extends StatelessWidget {
   final List swiperDataList;
-  SwiperDiy({Key key, this.swiperDataList}) : super(key: key);
-
+  SwiperDiy(this.swiperDataList) : super();
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 333.0,
+      height: 180.0,
       child: Swiper(
         itemBuilder: (BuildContext context, int index) {
-          return Image.asset("${swiperDataList[index]}",
-              fit: BoxFit.fill);
+          return Image.asset("${swiperDataList[index]}", fit: BoxFit.fill);
         },
         itemCount: swiperDataList.length,
         pagination: new SwiperPagination(),
