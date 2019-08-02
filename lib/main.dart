@@ -13,7 +13,7 @@ class App extends StatelessWidget{
       child: MaterialApp(
         title: "霍小叶电商项目",
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(primarySwatch: Colors.pink),
+        theme: ThemeData(primarySwatch: Colors.red),
         home: IndexPage()
       ),
 
