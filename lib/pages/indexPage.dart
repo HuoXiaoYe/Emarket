@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart' as prefix0;
+// import 'package:flutter/cupertino.dart' as prefix0;
 import "package:flutter/material.dart";
 import "package:flutter/cupertino.dart";
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // 导入 四个 主页面
 
@@ -37,6 +38,7 @@ class _IndexPageState extends State<IndexPage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 750.0,height: 1334)..init(context); // 
     return Scaffold(
       body: activePage,
       backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
