@@ -8,9 +8,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +21,8 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: <Widget>[
           MySwiper(swiperDataList), // 轮播图
-          Topnavigator(navIconList) // 导航栏
+          Topnavigator(navIconList), // 导航栏
+          AdBanner(imgAdBanner),
         ],
       ),
     );
@@ -31,38 +30,59 @@ class _HomePageState extends State<HomePage> {
 }
 
 
-
-
-
+// 导航栏
 class Topnavigator extends StatelessWidget {
   final List navList;
-  Topnavigator(this.navList):super();
+  Topnavigator(this.navList) : super();
 
-  Widget _gridViewItemUI(BuildContext context,item){
+  // 每一个导航的小图标
+  Widget _gridViewItemUI(BuildContext context, item) {
     return InkWell(
-      onTap: (){
-
-      },
+      onTap: () {},
       child: Column(
         children: <Widget>[
-          Image.network(item["imgUrl"],width: ScreenUtil.getInstance().setWidth(95),),
-          Text(item["desc"])
+          Image.network(
+            item["imgUrl"],
+            width: ScreenUtil.getInstance().setWidth(95),
+          ),
+          Text(
+            item["desc"],
+            style: TextStyle(),
+          )
         ],
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil.getInstance().setHeight(320),
+      margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+      height: ScreenUtil.getInstance().setHeight(340),
       padding: EdgeInsets.all(3.0),
       child: GridView.count(
         crossAxisCount: 5,
-        padding: EdgeInsets.all(5.0),
-        children: navList.map((item){
+        // crossAxisSpacing: 5,
+        padding: EdgeInsets.all(3.0),
+        children: navList.map((item) {
           return _gridViewItemUI(context, item);
         }).toList(),
       ),
+    );
+  }
+}
+
+
+
+// 
+
+class AdBanner extends StatelessWidget {
+  final String picture;
+  AdBanner(this.picture):super();
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Image.asset(picture,fit: BoxFit.fitWidth,width: ScreenUtil.getInstance().setWidth(700),),
     );
   }
 }

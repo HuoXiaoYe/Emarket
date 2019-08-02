@@ -57,3 +57,6 @@ List navIconList = [
     "desc": "泡温泉"
   }
 ];
+
+const imgAdBanner = "images/adbanner.PNG";
+const imgPhone = "images/phone.PNG";
