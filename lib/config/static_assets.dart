@@ -60,3 +60,14 @@ List navIconList = [
 
 const imgAdBanner = "images/adbanner.PNG";
 const imgPhone = "images/phone.PNG";
+
+// 热门推荐数据
+
+const recommendData = [
+  {"img":"images/jiu1.PNG","newPrice":"333","oldPrice":"555"},
+  {"img":"images/jiu1.PNG","newPrice":"333","oldPrice":"555"},
+  {"img":"images/jiu1.PNG","newPrice":"333","oldPrice":"555"},
+  {"img":"images/jiu1.PNG","newPrice":"333","oldPrice":"555"},
+  {"img":"images/jiu1.PNG","newPrice":"333","oldPrice":"555"},
+  {"img":"images/jiu1.PNG","newPrice":"333","oldPrice":"555"}
+];

@@ -55,6 +55,7 @@ flutter:
     - images/banner/a4.jpg
     - images/adbanner.PNG
     - images/phone.PNG
+    - images/jiu1.PNG
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
