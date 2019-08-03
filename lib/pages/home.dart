@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import "./common_component/banner.dart";
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +28,8 @@ class _HomePageState extends State<HomePage> {
             Topnavigator(navIconList), // 导航栏
             AdBanner(imgAdBanner), // 图片
             LeadPhone(imgPhone, "17725350095"), // 一键打电话
-            Recommend(recommendData)
+            Recommend(recommendData),
+            MyCommend(commendData:recommendData)
           ],
         ),
       ),
@@ -143,7 +145,10 @@ class Recommend extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft, // 居中靠左对齐
       padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
-      child: Text("热门推荐"),
+      child: Text(
+        "热门推荐",
+        style: TextStyle(color: Colors.pink),
+      ),
       decoration: BoxDecoration(
           border:
               Border(bottom: BorderSide(width: 0.5, color: Colors.black12))),
@@ -153,7 +158,7 @@ class Recommend extends StatelessWidget {
   Widget _myListTile(BuildContext context, item) {
     return InkWell(
       child: Container(
-        height: ScreenUtil.getInstance().setHeight(300),
+        height: ScreenUtil.getInstance().setHeight(380),
         width: ScreenUtil.getInstance().setWidth(250),
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -164,17 +169,22 @@ class Recommend extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Image.asset(item['img']),
-            Text(item['newPrice']),
-            Container(
-              height: 4.0,
+            Expanded(
+              child: Container(),
+            ),
+            Expanded(
+              child: Container(),
+            ),
+            Text(item['newPrice'] + "元"),
+            Expanded(
+              child: Container(),
             ),
             Text(
-              item['oldPrice']+"元",
+              item['oldPrice'] + "元",
               style: TextStyle(
-                  decoration: TextDecoration.lineThrough,
-                  color: Colors.black26,
-                  ),
-                  
+                decoration: TextDecoration.lineThrough,
+                color: Colors.black26,
+              ),
             ),
           ],
         ),
@@ -183,14 +193,103 @@ class Recommend extends StatelessWidget {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    print(myList.length);
+  Widget _list(BuildContext context) {
     return SizedBox(
-      height: ScreenUtil.getInstance().setHeight(380),
+      height: ScreenUtil.getInstance().setHeight(400),
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: myList.map((item) => _myListTile(context, item)).toList(),
-    ));
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print(myList.length);
+    return Container(
+        margin: EdgeInsets.only(top: 20.0),
+        height: ScreenUtil.getInstance().setHeight(450),
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[_myTitle(context), _list(context)],
+        ));
+  }
+}
+
+class MyCommend extends StatelessWidget {
+  final List commendData;
+  const MyCommend({Key key, this.commendData}) : super(key: key);
+
+  // 标题组件
+
+  Widget _myTitle(BuildContext context) {
+    return Container(
+        height: 40.0,
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.fromLTRB(10, 5, 0, 5),
+         decoration:BoxDecoration(
+           border: Border(
+             bottom: BorderSide(width: 1,color: Colors.black12)
+           )
+         ),
+        child: Text("热门推荐",style: TextStyle(color: Colors.pink),)
+      );
+       
+  }
+
+  // 热门推荐的每一个item
+  Widget _myItem(BuildContext context, item) {
+    return InkWell(
+      child: Container(
+          height: ScreenUtil.getInstance().setHeight(330),
+          padding: EdgeInsets.all(5),
+          width: ScreenUtil.getInstance().setWidth(250),
+          decoration: BoxDecoration(
+              border: Border(
+            bottom: BorderSide(color: Colors.black12, width: 1),
+            right: BorderSide(color: Colors.black12, width: 0.5),
+            left: BorderSide(color: Colors.black12, width: 0.5),
+          )),
+          child: Column(
+            children: <Widget>[
+              Image.asset(item['img'],width: 90,),
+              Expanded(child: Container(),),
+              Text("${item['newPrice']}元",style: TextStyle(fontSize: 14),),
+              Expanded(child: Container(),),
+              Text("${item['oldPrice']}元",style: TextStyle(
+                decoration: TextDecoration.lineThrough,
+                color: Colors.black45,
+                fontSize: 12.0
+              ),),
+            ],
+          )),
+    );
+  }
+
+  // 推荐list
+  Widget _myList(BuildContext context){
+    return Container(
+
+      height: ScreenUtil.getInstance().setHeight(300),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: commendData.map((item)=>_myItem(context,item)).toList(),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 20),
+      height: ScreenUtil.getInstance().setHeight(400),
+      color: Colors.white,
+      child: Column(
+        children: <Widget>[
+          _myTitle(context),
+          _myList(context)
+        ],
+      ),
+    );
   }
 }
