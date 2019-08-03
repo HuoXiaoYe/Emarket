@@ -15,7 +15,8 @@ class IndexPage extends StatefulWidget {
   _IndexPageState createState() => _IndexPageState();
 }
 
-class _IndexPageState extends State<IndexPage> {
+class _IndexPageState extends State<IndexPage>{
+
   // 底部导航栏数组
   final List<BottomNavigationBarItem> bottomTabs = [
     BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text("首页")),
@@ -29,6 +30,10 @@ class _IndexPageState extends State<IndexPage> {
   int _activeIndex = 0;
   // 默认显示的页面
   var activePage;
+
+
+
+
   @override
   void initState() {
     activePage = tabBody[_activeIndex];
@@ -40,7 +45,10 @@ class _IndexPageState extends State<IndexPage> {
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 750.0,height: 1334)..init(context); // 
     return Scaffold(
-      body: activePage,
+      body: IndexedStack(
+        index: _activeIndex,
+        children: tabBody,
+      ),
       backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed, // 图标不会抖动
