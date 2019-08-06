@@ -78,6 +78,7 @@ class Topnavigator extends StatelessWidget {
       height: ScreenUtil.getInstance().setHeight(340),
       padding: EdgeInsets.all(3.0),
       child: GridView.count(
+        physics:NeverScrollableScrollPhysics(),
         crossAxisCount: 5,
         // crossAxisSpacing: 5,
         padding: EdgeInsets.all(3.0),
