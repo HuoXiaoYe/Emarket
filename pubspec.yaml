@@ -61,7 +61,7 @@ flutter:
     - images/c3.PNG
     - images/c4.PNG
     - images/c5.PNG
-    - images/t1.PNG
+    - images/titile.PNG
     - images/hot1.PNG
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -7,12 +7,12 @@ import '../config/static_assets.dart';
 
 import "package:url_launcher/url_launcher.dart";
 
-class HomePage extends StatefulWidget   {
+class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
-
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -33,10 +33,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             AdBanner(imgAdBanner), // 图片
             LeadPhone(imgPhone, "17725350095"), // 一键打电话
             Recommend(recommendData),
-            MyCommend(commendData:recommendData),
+            MyCommend(commendData: recommendData),
             // CircleAvatar(),
-            NoName(noNameData), // 无题专区 
-            NoName(noNameData), // 无题专区 
+            NoName(noNameData), // 无题专区
+            NoName(noNameData), // 无题专区
+            HotProduct()
           ],
         ),
       ),
@@ -78,7 +79,7 @@ class Topnavigator extends StatelessWidget {
       height: ScreenUtil.getInstance().setHeight(340),
       padding: EdgeInsets.all(3.0),
       child: GridView.count(
-        physics:NeverScrollableScrollPhysics(),
+        physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 5,
         // crossAxisSpacing: 5,
         padding: EdgeInsets.all(3.0),
@@ -235,14 +236,13 @@ class MyCommend extends StatelessWidget {
         height: 40.0,
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.fromLTRB(10, 5, 0, 5),
-         decoration:BoxDecoration(
-           border: Border(
-             bottom: BorderSide(width: 1,color: Colors.black12)
-           )
-         ),
-        child: Text("热门推荐",style: TextStyle(color: Colors.pink),)
-      );
-       
+        decoration: BoxDecoration(
+            border:
+                Border(bottom: BorderSide(width: 1, color: Colors.black12))),
+        child: Text(
+          "热门推荐",
+          style: TextStyle(color: Colors.pink),
+        ));
   }
 
   // 热门推荐的每一个item
@@ -260,28 +260,39 @@ class MyCommend extends StatelessWidget {
           )),
           child: Column(
             children: <Widget>[
-              Image.asset(item['img'],width: 90,),
-              Expanded(child: Container(),),
-              Text("${item['newPrice']}元",style: TextStyle(fontSize: 14),),
-              Expanded(child: Container(),),
-              Text("${item['oldPrice']}元",style: TextStyle(
-                decoration: TextDecoration.lineThrough,
-                color: Colors.black45,
-                fontSize: 12.0
-              ),),
+              Image.asset(
+                item['img'],
+                width: 90,
+              ),
+              Expanded(
+                child: Container(),
+              ),
+              Text(
+                "${item['newPrice']}元",
+                style: TextStyle(fontSize: 14),
+              ),
+              Expanded(
+                child: Container(),
+              ),
+              Text(
+                "${item['oldPrice']}元",
+                style: TextStyle(
+                    decoration: TextDecoration.lineThrough,
+                    color: Colors.black45,
+                    fontSize: 12.0),
+              ),
             ],
           )),
     );
   }
 
   // 推荐list
-  Widget _myList(BuildContext context){
+  Widget _myList(BuildContext context) {
     return Container(
-
       height: ScreenUtil.getInstance().setHeight(300),
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: commendData.map((item)=>_myItem(context,item)).toList(),
+        children: commendData.map((item) => _myItem(context, item)).toList(),
       ),
     );
   }
@@ -293,10 +304,7 @@ class MyCommend extends StatelessWidget {
       height: ScreenUtil.getInstance().setHeight(400),
       color: Colors.white,
       child: Column(
-        children: <Widget>[
-          _myTitle(context),
-          _myList(context)
-        ],
+        children: <Widget>[_myTitle(context), _myList(context)],
       ),
     );
   }
@@ -314,21 +322,22 @@ class MyCommend extends StatelessWidget {
 //   }
 // }
 
-
 // 无题专区
 
 class NoName extends StatelessWidget {
   List myData;
-  NoName(this.myData):super();
+  NoName(this.myData) : super();
 
-  Widget _title(BuildContext context){
+  Widget _title(BuildContext context) {
     return Container(
       height: 100,
-      child: Image.asset("images/t1.PNG"),
+      child: Image.asset("images/titile.PNG"),
     );
   }
 
-  Widget _firstRow(BuildContext context,){
+  Widget _firstRow(
+    BuildContext context,
+  ) {
     return Row(
       children: <Widget>[
         Container(
@@ -348,22 +357,22 @@ class NoName extends StatelessWidget {
     );
   }
 
-  Widget _secondRow(BuildContext context){
-    return Row(children: <Widget>[
-      Container(
-        width: ScreenUtil.getInstance().setWidth(375),
-        child: Image.asset("images/c4.PNG"),
-      ),
-      Container(
-        width: ScreenUtil.getInstance().setWidth(375),
-        child: Image.asset("images/c5.PNG"),
-      ),
-    ],);
+  Widget _secondRow(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Container(
+          width: ScreenUtil.getInstance().setWidth(375),
+          child: Image.asset("images/c4.PNG"),
+        ),
+        Container(
+          width: ScreenUtil.getInstance().setWidth(375),
+          child: Image.asset("images/c5.PNG"),
+        ),
+      ],
+    );
   }
 
-
   @override
-
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
@@ -371,7 +380,61 @@ class NoName extends StatelessWidget {
         _firstRow(context),
         _secondRow(context),
       ],
-      
+    );
+  }
+}
+
+// 火爆专区页面 实现下拉加载更多
+
+class HotProduct extends StatefulWidget {
+  @override
+  _HotProductState createState() => _HotProductState();
+}
+
+class _HotProductState extends State<HotProduct> {
+  List hotData = [1, 2, 3, 4, 5, 6];
+  // _HotProductState(this.hotData):super();
+  @override
+  Widget _item(BuildContext context) {
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(372),
+      height: ScreenUtil.getInstance().setWidth(375),
+      margin: EdgeInsets.only(bottom: 3),
+      child: Image.asset(
+        "images/hot1.PNG",
+        fit: BoxFit.fill,
+      ),
+      // child: null,
+    );
+  }
+
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(top:10,bottom: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                color: Colors.red,
+              ),
+              child: Icon(Icons.hot_tub,color: Colors.white,),
+            ),
+            Text("火爆专区")
+          ],
+        ),
+        ),
+        Wrap(
+          spacing: 2,
+          children: hotData.map((item) => _item(context)).toList(),
+        )
+      ],
     );
   }
 }
