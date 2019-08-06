@@ -71,3 +71,11 @@ const recommendData = [
   {"img":"images/jiu1.PNG","newPrice":"333","oldPrice":"555"},
   {"img":"images/jiu1.PNG","newPrice":"333","oldPrice":"555"}
 ];
+
+const noNameData = [
+  "images/c1.PNG",
+  "images/c2.PNG",
+  "images/c3.PNG",
+  "images/c4.PNG",
+  "images/c5.PNG",
+];

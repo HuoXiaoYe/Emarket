@@ -33,7 +33,10 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             AdBanner(imgAdBanner), // 图片
             LeadPhone(imgPhone, "17725350095"), // 一键打电话
             Recommend(recommendData),
-            MyCommend(commendData:recommendData)
+            MyCommend(commendData:recommendData),
+            // CircleAvatar(),
+            NoName(noNameData), // 无题专区 
+            NoName(noNameData), // 无题专区 
           ],
         ),
       ),
@@ -294,6 +297,80 @@ class MyCommend extends StatelessWidget {
           _myList(context)
         ],
       ),
+    );
+  }
+}
+
+// 制作一个头像
+// class CircleAvatar extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: CircleAvatar(
+//         backgroundImg: NetworkImage("")
+//       )
+//     );
+//   }
+// }
+
+
+// 无题专区
+
+class NoName extends StatelessWidget {
+  List myData;
+  NoName(this.myData):super();
+
+  Widget _title(BuildContext context){
+    return Container(
+      height: 100,
+      child: Image.asset("images/t1.PNG"),
+    );
+  }
+
+  Widget _firstRow(BuildContext context,){
+    return Row(
+      children: <Widget>[
+        Container(
+          width: ScreenUtil.getInstance().setWidth(375),
+          child: Image.asset("images/c1.PNG"),
+        ),
+        Container(
+          width: ScreenUtil.getInstance().setWidth(375),
+          child: Column(
+            children: <Widget>[
+              Image.asset("images/c2.PNG"),
+              Image.asset("images/c3.PNG"),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _secondRow(BuildContext context){
+    return Row(children: <Widget>[
+      Container(
+        width: ScreenUtil.getInstance().setWidth(375),
+        child: Image.asset("images/c4.PNG"),
+      ),
+      Container(
+        width: ScreenUtil.getInstance().setWidth(375),
+        child: Image.asset("images/c5.PNG"),
+      ),
+    ],);
+  }
+
+
+  @override
+
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        _title(context),
+        _firstRow(context),
+        _secondRow(context),
+      ],
+      
     );
   }
 }
