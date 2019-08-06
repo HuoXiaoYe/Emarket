@@ -7,6 +7,10 @@ import '../config/static_assets.dart';
 
 import "package:url_launcher/url_launcher.dart";
 
+// 上拉加载更多
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_easyrefresh/material_footer.dart';
+
 class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
@@ -15,6 +19,8 @@ class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+
+  List data = [1, 2, 3, 4, 5, 6];
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +31,14 @@ class _HomePageState extends State<HomePage>
             centerTitle: true,
           ),
           preferredSize: Size.fromHeight(50.0)),
-      body: SingleChildScrollView(
-        child: Column(
+      body: EasyRefresh(
+        onLoad: () async {
+          setState(() {
+            data.addAll([1]);
+          });
+        },
+        footer: MaterialFooter(),
+        child: ListView(
           children: <Widget>[
             MySwiper(swiperDataList), // 轮播图
             Topnavigator(navIconList), // 导航栏
@@ -37,7 +49,8 @@ class _HomePageState extends State<HomePage>
             // CircleAvatar(),
             NoName(noNameData), // 无题专区
             NoName(noNameData), // 无题专区
-            HotProduct()
+            HotProduct(data)
+            // _HotProductState(data)
           ],
         ),
       ),
@@ -386,14 +399,9 @@ class NoName extends StatelessWidget {
 
 // 火爆专区页面 实现下拉加载更多
 
-class HotProduct extends StatefulWidget {
-  @override
-  _HotProductState createState() => _HotProductState();
-}
-
-class _HotProductState extends State<HotProduct> {
-  List hotData = [1, 2, 3, 4, 5, 6];
-  // _HotProductState(this.hotData):super();
+class HotProduct extends StatelessWidget {
+  List hotData;
+  HotProduct(this.hotData) : super();
   @override
   Widget _item(BuildContext context) {
     return Container(
@@ -412,23 +420,27 @@ class _HotProductState extends State<HotProduct> {
     return Column(
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(top:10,bottom: 10),
+          padding: EdgeInsets.only(top: 10, bottom: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              width: 30,
-              height: 30,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Colors.red,
+            children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                width: 30,
+                height: 30,
+                margin: EdgeInsets.only(right: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  color: Colors.red,
+                ),
+                child: Icon(
+                  Icons.hot_tub,
+                  color: Colors.white,
+                ),
               ),
-              child: Icon(Icons.hot_tub,color: Colors.white,),
-            ),
-            Text("火爆专区")
-          ],
-        ),
+              Text("火爆专区")
+            ],
+          ),
         ),
         Wrap(
           spacing: 2,
