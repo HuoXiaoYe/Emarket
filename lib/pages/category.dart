@@ -5,15 +5,13 @@ class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        // height: ScreenUtil.getInstance().setHeight(2000),
-        children: <Widget>[
+      body: Container(
+        child:
           Row(
             children: <Widget>[
               LeftCategory(),
             ],
           )
-        ],
       ),
     );
   }
@@ -59,7 +57,7 @@ class _LeftCategoryState extends State<LeftCategory> {
         child: Container(
         alignment: Alignment.center,
         height: ScreenUtil.getInstance().setHeight(80),
-        width: ScreenUtil.getInstance().setWidth(140),
+        width: ScreenUtil.getInstance().setWidth(180),
         child: Text(
           categoryList[index],
           style: TextStyle(
@@ -74,8 +72,8 @@ class _LeftCategoryState extends State<LeftCategory> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil.getInstance().setWidth(140),
-      height: ScreenUtil.getInstance().setHeight(2800),
+      width: ScreenUtil.getInstance().setWidth(180),
+      // height: ScreenUtil.getInstance().setHeight(2800),
       decoration: BoxDecoration(
           border: Border(right: BorderSide(width: 1, color: Colors.black26))),
       child: ListView.builder(
