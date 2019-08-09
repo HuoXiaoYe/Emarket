@@ -9,7 +9,7 @@ void getCategory() async {
   try {
     Response response = await Dio().get(servicePath['category']);
     var data = json.decode(response.toString());
-    print(data['data'][0]['mallCategoryName']);
+    // print(data['data'][0]['mallCategoryName']);
   } catch (e) {
     print(e);
   }
