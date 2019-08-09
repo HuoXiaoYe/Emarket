@@ -1,20 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import "../dio/getData.dart";
-import 'package:dio/dio.dart';
-
 class Category extends StatelessWidget {
-
-
-void getHttp() async {
-  try {
-    Response response = await Dio().get("https://www.easy-mock.com/mock/5d4cccca4ce8361b8ce8d037/huoxiaoye/emarket/category");
-    print(response is List);
-  } catch (e) {
-    print(e);
-  }
-}
-
 
   @override
   Widget build(BuildContext context) {
