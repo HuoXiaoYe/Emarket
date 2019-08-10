@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ChildCategoryList {
 
-  List _list = [];
+  List _childList = [];
 
 
   final _childActionController = StreamController<List>();
@@ -22,6 +22,8 @@ class ChildCategoryList {
     // print("========");
     // data.forEach((item) => print(item.mallSubName));
     // print("========");
+    _childList = data;
+    _childController.add(data);
   }
 }
 

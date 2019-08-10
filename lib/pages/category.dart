@@ -29,7 +29,6 @@ class Category extends StatelessWidget {
   }
 }
 
-
 // 左侧一级分类
 class LeftCategory extends StatefulWidget {
   @override
@@ -56,23 +55,20 @@ class _LeftCategoryState extends State<LeftCategory> {
   void initState() {
     super.initState();
     _getCategoryData();
+    
   }
 
   Widget _leftCategoryItem(BuildContext context, index) {
     ChildCategoryList _counterBloc = ChildCategoryProvider.of(context).bloc;
-    _counterBloc.childCategoryList
-                .add(categoryList[0].bxMallSubDto);
+    // _counterBloc.childCategoryList.add(categoryList[0].bxMallSubDto);
     return InkWell(
         onTap: () {
           setState(() {
-            // print()
             // 将值赋值给store
             _counterBloc.childCategoryList
                 .add(categoryList[index].bxMallSubDto);
             currentIndex = index;
           });
-
-          //
         },
         child: Container(
           alignment: Alignment.center,
@@ -107,7 +103,6 @@ class _LeftCategoryState extends State<LeftCategory> {
   }
 }
 
-
 // 右侧 二级分类
 class RightChildCategory extends StatefulWidget {
   @override
@@ -115,7 +110,7 @@ class RightChildCategory extends StatefulWidget {
 }
 
 class _RightChildCategoryState extends State<RightChildCategory> {
-  Widget _rightChildCategoryItem(index,data) {
+  Widget _rightChildCategoryItem(index, data) {
     return InkWell(
       onTap: () {
         setState(() {
@@ -127,7 +122,7 @@ class _RightChildCategoryState extends State<RightChildCategory> {
         padding: EdgeInsets.all(5),
         alignment: Alignment.center,
         child: Text(
-          data[index]['mallSubName'],
+          data[index].mallSubName.toString(),
           style: TextStyle(
               color: currentIndex == index ? Colors.red : Colors.black),
         ),
@@ -148,13 +143,11 @@ class _RightChildCategoryState extends State<RightChildCategory> {
         initialData: 0,
         stream: _counterBloc.childList,
         builder: (context, snapshot) {
-          // return ListView.builder(
-          //   itemCount: snapshot.data.length,
-          //   scrollDirection: Axis.horizontal,
-          //   itemBuilder: (context, index) => _rightChildCategoryItem(index,snapshot.data),
-          // );
-          return Container(
-            child: Text(snapshot.toString()),
+          return ListView.builder(
+            itemCount: snapshot.data.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) =>
+                _rightChildCategoryItem(index, snapshot.data),
           );
         },
       ),
