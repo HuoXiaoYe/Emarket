@@ -1,3 +1,53 @@
+// class CategoryBigModel {
+//   String mallCategoryId;    //类别编号
+//   String mallCategoryName;  //类别名称
+//   List<dynamic> bxMallSubDto;        //小类列表
+//   String image;             //类别图片
+//   Null comments;          //列表描述
+
+//   //构造函数
+//   CategoryBigModel({
+//     this.mallCategoryId,
+//     this.mallCategoryName,
+//     this.comments,
+//     this.image,
+//     this.bxMallSubDto
+//   });
+
+//   //工厂模式-用这种模式可以省略New关键字
+//   factory CategoryBigModel.fromJson(dynamic json){
+
+//     return CategoryBigModel(
+//       mallCategoryId:json['mallCategoryId'],
+//       mallCategoryName:json['mallCategoryName'],
+//       comments:json['comments'],
+//       image:json['image'],
+//       bxMallSubDto:json['bxMallSubDto']
+//     );
+
+//   }
+  
+// }
+
+// class CategoryBigListModel {
+//   List<CategoryBigModel> data;
+//   CategoryBigListModel(this.data);
+//   factory CategoryBigListModel.fromJson(List json){
+//     return CategoryBigListModel(
+//       json.map((i)=>CategoryBigModel.fromJson((i))).toList()
+//     );
+//   }
+  
+// }
+
+
+
+
+
+
+
+
+
 class CategoryModel {
   String code;
   String message;
@@ -5,7 +55,7 @@ class CategoryModel {
 
   CategoryModel({this.code, this.message, this.data});
 
-  CategoryModel.fromJson(Map json) {
+  CategoryModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     message = json['message'];
     if (json['data'] != null) {
@@ -16,8 +66,8 @@ class CategoryModel {
     }
   }
 
-  Map toJson() {
-    final Map data = new Map();
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['code'] = this.code;
     data['message'] = this.message;
     if (this.data != null) {
@@ -41,7 +91,7 @@ class Data {
       this.comments,
       this.image});
 
-  Data.fromJson(Map json) {
+  Data.fromJson(Map<String, dynamic> json) {
     mallCategoryId = json['mallCategoryId'];
     mallCategoryName = json['mallCategoryName'];
     if (json['bxMallSubDto'] != null) {
@@ -54,8 +104,8 @@ class Data {
     image = json['image'];
   }
 
-  Map toJson() {
-    final Map data = new Map();
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['mallCategoryId'] = this.mallCategoryId;
     data['mallCategoryName'] = this.mallCategoryName;
     if (this.bxMallSubDto != null) {
@@ -76,15 +126,15 @@ class BxMallSubDto {
   BxMallSubDto(
       {this.mallSubId, this.mallCategoryId, this.mallSubName, this.comments});
 
-  BxMallSubDto.fromJson(Map json) {
+  BxMallSubDto.fromJson(Map<String, dynamic> json) {
     mallSubId = json['mallSubId'];
     mallCategoryId = json['mallCategoryId'];
     mallSubName = json['mallSubName'];
     comments = json['comments'];
   }
 
-  Map toJson() {
-    final Map data = new Map();
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['mallSubId'] = this.mallSubId;
     data['mallCategoryId'] = this.mallCategoryId;
     data['mallSubName'] = this.mallSubName;

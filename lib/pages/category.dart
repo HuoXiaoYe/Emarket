@@ -5,7 +5,8 @@ class Category extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getCategory();
+    // getCategory();
+    getData();
     return Scaffold(
       body: Container(
         child:
