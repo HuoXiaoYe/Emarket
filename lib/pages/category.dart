@@ -69,6 +69,7 @@ class _LeftCategoryState extends State<LeftCategory> {
     // });
 
     var res = catagoryList.data.map((item) => item.mallCategoryName).toList();
+    // 绑定数据
     setState(() {
       categoryList = res;
     });
@@ -80,8 +81,6 @@ class _LeftCategoryState extends State<LeftCategory> {
   void initState() { 
     super.initState();
    _getCategoryData();
-  //  print("=========");
-  //  print(aaa);
   }
 
 
