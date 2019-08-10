@@ -1,12 +1,20 @@
+// import 'package:dio/dio.dart';
+import 'dart:convert';
+
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import "../dio/getData.dart";
+import "../config/service_url.dart";
+import '../model/categoryModel.dart';
 class Category extends StatelessWidget {
+
+
+  
+
 
   @override
   Widget build(BuildContext context) {
-    // getCategory();
-    getData();
+
     return Scaffold(
       body: Container(
         child:
@@ -49,6 +57,27 @@ class _LeftCategoryState extends State<LeftCategory> {
     "分类19",
     "分类20",
   ];
+
+// 请求数据的方法
+  void _getCategoryData() async{
+    // List catagoryList;
+    await request(servicePath['category']).then((response){
+     CategoryModel catagoryList = CategoryModel.fromJson(response);
+     
+    catagoryList.data.forEach((item){
+      print(item.mallCategoryName);
+    });
+
+    });
+  }
+
+  @override
+  void initState() { 
+    super.initState();
+    _getCategoryData();
+  }
+
+
 
   Widget _leftCategoryItem(BuildContext context, index) {
     return InkWell(

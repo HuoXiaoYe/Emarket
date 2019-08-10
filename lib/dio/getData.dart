@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'dart:convert';
 // 获取分类页面分类的函数
-
 // void getCategory() async {
 //   print(servicePath['category']);
 //   try {
@@ -15,7 +14,7 @@ import 'dart:convert';
 // }
 
 
-// 请求数据的方法
+// 异步请求数据的方法
 Future request(url) async {
     Response response = await Dio().get(url);
     var data = json.decode(response.toString());
