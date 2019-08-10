@@ -5,6 +5,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import "../dio/getData.dart";
 import "../config/service_url.dart";
+import '../config/static_assets.dart';
 import '../model/categoryModel.dart';
 class Category extends StatelessWidget {
   @override
@@ -19,6 +20,11 @@ class Category extends StatelessWidget {
           Row(
             children: <Widget>[
               LeftCategory(),
+              Column(
+                children: <Widget>[
+                  RightChildCategory()
+                ],
+              )
             ],
           )
       ),
@@ -101,6 +107,34 @@ class _LeftCategoryState extends State<LeftCategory> {
         itemBuilder: (context, index) {
           return _leftCategoryItem(context, index);
         },
+      ),
+    );
+  }
+}
+
+
+
+class RightChildCategory extends StatefulWidget {
+  @override
+  _RightChildCategoryState createState() => _RightChildCategoryState();
+}
+
+class _RightChildCategoryState extends State<RightChildCategory> {
+
+  Widget _rightChildCategoryItem(item){
+    return Container(
+      height: 40,
+      child: Text(item['mallSubName']),
+    );
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      width: ScreenUtil.getInstance().setWidth(570),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: bxMallSubDto.map((item)=>_rightChildCategoryItem(item)).toList(),
       ),
     );
   }
