@@ -81,6 +81,12 @@ const noNameData = [
 ];
 
 List bxMallSubDto = [
+   {
+    "mallSubId": "2c9f6c94621970a801626a35cb4d0175",
+    "mallCategoryId": "4",
+    "mallSubName": "全部",
+    "comments": ""
+  },
   {
     "mallSubId": "2c9f6c94621970a801626a35cb4d0175",
     "mallCategoryId": "4",

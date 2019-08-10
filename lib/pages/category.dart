@@ -7,27 +7,23 @@ import "../dio/getData.dart";
 import "../config/service_url.dart";
 import '../config/static_assets.dart';
 import '../model/categoryModel.dart';
+
 class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("商品分类"),
       ),
       body: Container(
-        child:
-          Row(
-            children: <Widget>[
-              LeftCategory(),
-              Column(
-                children: <Widget>[
-                  RightChildCategory()
-                ],
-              )
-            ],
+          child: Row(
+        children: <Widget>[
+          LeftCategory(),
+          Column(
+            children: <Widget>[RightChildCategory()],
           )
-      ),
+        ],
+      )),
     );
   }
 }
@@ -44,55 +40,52 @@ class _LeftCategoryState extends State<LeftCategory> {
   List childCategory;
 
 // 请求数据的方法
-  void _getCategoryData() async{
+  void _getCategoryData() async {
     // List catagoryList;
-    await request(servicePath['category']).then((response){
-     CategoryModel catagoryList = CategoryModel.fromJson(response);
-    var res = catagoryList.data.map((item) => item.mallCategoryName).toList();
-    // 绑定数据
-    setState(() {
-      // categoryList = res;
-      categoryList = catagoryList.data;
-      // childCategory = catagoryList.data;
-    });
-
+    await request(servicePath['category']).then((response) {
+      CategoryModel catagoryList = CategoryModel.fromJson(response);
+      var res = catagoryList.data.map((item) => item.mallCategoryName).toList();
+      // 绑定数据
+      setState(() {
+        // categoryList = res;
+        categoryList = catagoryList.data;
+        // childCategory = catagoryList.data;
+      });
     });
   }
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
-   _getCategoryData();
+    _getCategoryData();
   }
-
-
 
   Widget _leftCategoryItem(BuildContext context, index) {
     return InkWell(
-      onTap: (){
-        setState(() {
-          currentIndex = index;
-          // var currentChildCategory = childCategory[index].bxMallSubDto;
-          // print(categoryList[index].bxMallSubDto[0].mallSubName);
-
-        categoryList[index].bxMallSubDto.forEach((item){
-          print(item.mallSubName);
-        });
-        });
-      },
+        onTap: () {
+          setState(() {
+            currentIndex = index;
+            // var currentChildCategory = childCategory[index].bxMallSubDto;
+            // print(categoryList[index].bxMallSubDto[0].mallSubName);
+            // categoryList[index].bxMallSubDto.forEach((item) {
+            //   print(item.mallSubName);
+            // });
+          });
+        },
         child: Container(
-        alignment: Alignment.center,
-        height: ScreenUtil.getInstance().setHeight(80),
-        width: ScreenUtil.getInstance().setWidth(180),
-        child: Text(
-          categoryList[index].mallCategoryName,
-          style: TextStyle(
-              color: currentIndex == index ? Colors.white : Colors.black),
-        ),
-        decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(width: 1, color: Colors.black26)),
-            color: currentIndex == index ? Colors.red : Colors.white),
-      ));
+          alignment: Alignment.center,
+          height: ScreenUtil.getInstance().setHeight(80),
+          width: ScreenUtil.getInstance().setWidth(180),
+          child: Text(
+            categoryList[index].mallCategoryName,
+            style: TextStyle(
+                color: currentIndex == index ? Colors.white : Colors.black),
+          ),
+          decoration: BoxDecoration(
+              border:
+                  Border(bottom: BorderSide(width: 1, color: Colors.black26)),
+              color: currentIndex == index ? Colors.red : Colors.white),
+        ));
   }
 
   @override
@@ -112,8 +105,6 @@ class _LeftCategoryState extends State<LeftCategory> {
   }
 }
 
-
-
 class RightChildCategory extends StatefulWidget {
   @override
   _RightChildCategoryState createState() => _RightChildCategoryState();
@@ -121,20 +112,41 @@ class RightChildCategory extends StatefulWidget {
 
 class _RightChildCategoryState extends State<RightChildCategory> {
 
-  Widget _rightChildCategoryItem(item){
-    return Container(
-      height: 40,
-      child: Text(item['mallSubName']),
+  int currentIndex = 0; // 记录亮起的二级导航索引
+
+
+
+  Widget _rightChildCategoryItem(index) {
+    return InkWell(
+      onTap: (){
+       setState(() {
+         currentIndex = index; 
+       });
+        print(1);
+      },
+      child: Container(
+        height: 40,
+        padding: EdgeInsets.all(5),
+        alignment: Alignment.center,
+        child: Text(bxMallSubDto[index]['mallSubName'],style: TextStyle(
+          color: currentIndex == index ? Colors.red:Colors.black
+        ),),
+      ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 40,
       width: ScreenUtil.getInstance().setWidth(570),
-      child: ListView(
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(width: 1,color: Colors.black26))
+      ),
+      child: ListView.builder(
+        itemCount: bxMallSubDto.length,
         scrollDirection: Axis.horizontal,
-        children: bxMallSubDto.map((item)=>_rightChildCategoryItem(item)).toList(),
+        itemBuilder: (context,index)=>_rightChildCategoryItem(index),
       ),
     );
   }
