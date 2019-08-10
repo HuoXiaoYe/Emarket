@@ -1,5 +1,5 @@
 // import 'package:dio/dio.dart';
-import 'dart:convert';
+// import 'dart:convert';
 
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,15 +7,13 @@ import "../dio/getData.dart";
 import "../config/service_url.dart";
 import '../model/categoryModel.dart';
 class Category extends StatelessWidget {
-
-
-  
-
-
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("商品分类"),
+      ),
       body: Container(
         child:
           Row(
@@ -35,43 +33,21 @@ class LeftCategory extends StatefulWidget {
 
 class _LeftCategoryState extends State<LeftCategory> {
   int currentIndex = 0;
-  List<String> categoryList = [
-    "分类1",
-    "分类2",
-    "分类3",
-    "分类4",
-    "分类5",
-    "分类6",
-    "分类7",
-    "分类8",
-    "分类9",
-    "分类10",
-    "分类11",
-    "分类12",
-    "分类13",
-    "分类14",
-    "分类15",
-    "分类16",
-    "分类17",
-    "分类18",
-    "分类19",
-    "分类20",
-  ];
+  // List<String> categoryList;
+  List categoryList = [];
+  List childCategory;
 
 // 请求数据的方法
   void _getCategoryData() async{
     // List catagoryList;
     await request(servicePath['category']).then((response){
      CategoryModel catagoryList = CategoryModel.fromJson(response);
-     
-    // catagoryList.data.forEach((item){
-    //   print(item.mallCategoryName);
-    // });
-
     var res = catagoryList.data.map((item) => item.mallCategoryName).toList();
     // 绑定数据
     setState(() {
-      categoryList = res;
+      // categoryList = res;
+      categoryList = catagoryList.data;
+      // childCategory = catagoryList.data;
     });
 
     });
@@ -90,6 +66,12 @@ class _LeftCategoryState extends State<LeftCategory> {
       onTap: (){
         setState(() {
           currentIndex = index;
+          // var currentChildCategory = childCategory[index].bxMallSubDto;
+          // print(categoryList[index].bxMallSubDto[0].mallSubName);
+
+        categoryList[index].bxMallSubDto.forEach((item){
+          print(item.mallSubName);
+        });
         });
       },
         child: Container(
@@ -97,13 +79,13 @@ class _LeftCategoryState extends State<LeftCategory> {
         height: ScreenUtil.getInstance().setHeight(80),
         width: ScreenUtil.getInstance().setWidth(180),
         child: Text(
-          categoryList[index],
+          categoryList[index].mallCategoryName,
           style: TextStyle(
               color: currentIndex == index ? Colors.white : Colors.black),
         ),
         decoration: BoxDecoration(
             border: Border(bottom: BorderSide(width: 1, color: Colors.black26)),
-            color: currentIndex == index ? Colors.redAccent : Colors.white),
+            color: currentIndex == index ? Colors.red : Colors.white),
       ));
   }
 
