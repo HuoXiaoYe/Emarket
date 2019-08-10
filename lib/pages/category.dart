@@ -1,6 +1,7 @@
 // import 'package:dio/dio.dart';
 // import 'dart:convert';
 
+import 'package:emarket/store/bloc.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import "../dio/getData.dart";
@@ -47,9 +48,7 @@ class _LeftCategoryState extends State<LeftCategory> {
       var res = catagoryList.data.map((item) => item.mallCategoryName).toList();
       // 绑定数据
       setState(() {
-        // categoryList = res;
         categoryList = catagoryList.data;
-        // childCategory = catagoryList.data;
       });
     });
   }
@@ -61,16 +60,22 @@ class _LeftCategoryState extends State<LeftCategory> {
   }
 
   Widget _leftCategoryItem(BuildContext context, index) {
+    ChildCategoryList _counterBloc = ChildCategoryProvider.of(context).bloc;
     return InkWell(
         onTap: () {
           setState(() {
+            // print("==================");
+            // // print(categoryList[index].bxMallSubDto);
+            // categoryList[index]
+            //     .bxMallSubDto
+            //     .forEach((item) => print(item.mallSubName));
+            // print("==================");
+            // _counterBloc.childCategoryList.add(bxMallSubDto[index].bxMallSubDto);
+            _counterBloc.childCategoryList.add([1,2,3]);
             currentIndex = index;
-            // var currentChildCategory = childCategory[index].bxMallSubDto;
-            // print(categoryList[index].bxMallSubDto[0].mallSubName);
-            // categoryList[index].bxMallSubDto.forEach((item) {
-            //   print(item.mallSubName);
-            // });
           });
+
+          // 
         },
         child: Container(
           alignment: Alignment.center,
@@ -111,42 +116,40 @@ class RightChildCategory extends StatefulWidget {
 }
 
 class _RightChildCategoryState extends State<RightChildCategory> {
-
-  int currentIndex = 0; // 记录亮起的二级导航索引
-
-
-
   Widget _rightChildCategoryItem(index) {
     return InkWell(
-      onTap: (){
-       setState(() {
-         currentIndex = index; 
-       });
-        print(1);
+      onTap: () {
+        setState(() {
+          currentIndex = index;
+        });
+        print(bxMallSubDto[index].bxMallSubDto);
+        // _counterBloc.childCategoryList.add(bxMallSubDto[index].bxMallSubDto);
       },
       child: Container(
         height: 40,
         padding: EdgeInsets.all(5),
         alignment: Alignment.center,
-        child: Text(bxMallSubDto[index]['mallSubName'],style: TextStyle(
-          color: currentIndex == index ? Colors.red:Colors.black
-        ),),
+        child: Text(
+          bxMallSubDto[index]['mallSubName'],
+          style: TextStyle(
+              color: currentIndex == index ? Colors.red : Colors.black),
+        ),
       ),
     );
   }
 
+  int currentIndex = 0; // 记录亮起的二级导航索引
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 40,
       width: ScreenUtil.getInstance().setWidth(570),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(width: 1,color: Colors.black26))
-      ),
+          border: Border(bottom: BorderSide(width: 1, color: Colors.black26))),
       child: ListView.builder(
         itemCount: bxMallSubDto.length,
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context,index)=>_rightChildCategoryItem(index),
+        itemBuilder: (context, index) => _rightChildCategoryItem(index),
       ),
     );
   }
