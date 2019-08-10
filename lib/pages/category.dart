@@ -29,6 +29,8 @@ class Category extends StatelessWidget {
   }
 }
 
+
+// 左侧一级分类
 class LeftCategory extends StatefulWidget {
   @override
   _LeftCategoryState createState() => _LeftCategoryState();
@@ -36,7 +38,6 @@ class LeftCategory extends StatefulWidget {
 
 class _LeftCategoryState extends State<LeftCategory> {
   int currentIndex = 0;
-  // List<String> categoryList;
   List categoryList = [];
   List childCategory;
 
@@ -45,8 +46,6 @@ class _LeftCategoryState extends State<LeftCategory> {
     // List catagoryList;
     await request(servicePath['category']).then((response) {
       CategoryModel catagoryList = CategoryModel.fromJson(response);
-      var res = catagoryList.data.map((item) => item.mallCategoryName).toList();
-      // 绑定数据
       setState(() {
         categoryList = catagoryList.data;
       });
@@ -61,21 +60,19 @@ class _LeftCategoryState extends State<LeftCategory> {
 
   Widget _leftCategoryItem(BuildContext context, index) {
     ChildCategoryList _counterBloc = ChildCategoryProvider.of(context).bloc;
+    _counterBloc.childCategoryList
+                .add(categoryList[0].bxMallSubDto);
     return InkWell(
         onTap: () {
           setState(() {
-            // print("==================");
-            // // print(categoryList[index].bxMallSubDto);
-            // categoryList[index]
-            //     .bxMallSubDto
-            //     .forEach((item) => print(item.mallSubName));
-            // print("==================");
-            // _counterBloc.childCategoryList.add(bxMallSubDto[index].bxMallSubDto);
-            _counterBloc.childCategoryList.add([1,2,3]);
+            // print()
+            // 将值赋值给store
+            _counterBloc.childCategoryList
+                .add(categoryList[index].bxMallSubDto);
             currentIndex = index;
           });
 
-          // 
+          //
         },
         child: Container(
           alignment: Alignment.center,
@@ -110,27 +107,27 @@ class _LeftCategoryState extends State<LeftCategory> {
   }
 }
 
+
+// 右侧 二级分类
 class RightChildCategory extends StatefulWidget {
   @override
   _RightChildCategoryState createState() => _RightChildCategoryState();
 }
 
 class _RightChildCategoryState extends State<RightChildCategory> {
-  Widget _rightChildCategoryItem(index) {
+  Widget _rightChildCategoryItem(index,data) {
     return InkWell(
       onTap: () {
         setState(() {
           currentIndex = index;
         });
-        print(bxMallSubDto[index].bxMallSubDto);
-        // _counterBloc.childCategoryList.add(bxMallSubDto[index].bxMallSubDto);
       },
       child: Container(
         height: 40,
         padding: EdgeInsets.all(5),
         alignment: Alignment.center,
         child: Text(
-          bxMallSubDto[index]['mallSubName'],
+          data[index]['mallSubName'],
           style: TextStyle(
               color: currentIndex == index ? Colors.red : Colors.black),
         ),
@@ -141,16 +138,34 @@ class _RightChildCategoryState extends State<RightChildCategory> {
   int currentIndex = 0; // 记录亮起的二级导航索引
   @override
   Widget build(BuildContext context) {
+    ChildCategoryList _counterBloc = ChildCategoryProvider.of(context).bloc;
     return Container(
       height: 40,
       width: ScreenUtil.getInstance().setWidth(570),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(width: 1, color: Colors.black26))),
-      child: ListView.builder(
-        itemCount: bxMallSubDto.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => _rightChildCategoryItem(index),
+      child: StreamBuilder(
+        initialData: 0,
+        stream: _counterBloc.childList,
+        builder: (context, snapshot) {
+          // return ListView.builder(
+          //   itemCount: snapshot.data.length,
+          //   scrollDirection: Axis.horizontal,
+          //   itemBuilder: (context, index) => _rightChildCategoryItem(index,snapshot.data),
+          // );
+          return Container(
+            child: Text(snapshot.toString()),
+          );
+        },
       ),
     );
   }
 }
+
+/*
+ListView.builder(
+        itemCount: bxMallSubDto.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) => _rightChildCategoryItem(index),
+      )
+*/
