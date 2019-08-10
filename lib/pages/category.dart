@@ -64,8 +64,13 @@ class _LeftCategoryState extends State<LeftCategory> {
     await request(servicePath['category']).then((response){
      CategoryModel catagoryList = CategoryModel.fromJson(response);
      
-    catagoryList.data.forEach((item){
-      print(item.mallCategoryName);
+    // catagoryList.data.forEach((item){
+    //   print(item.mallCategoryName);
+    // });
+
+    var res = catagoryList.data.map((item) => item.mallCategoryName).toList();
+    setState(() {
+      categoryList = res;
     });
 
     });
@@ -74,7 +79,9 @@ class _LeftCategoryState extends State<LeftCategory> {
   @override
   void initState() { 
     super.initState();
-    _getCategoryData();
+   _getCategoryData();
+  //  print("=========");
+  //  print(aaa);
   }
 
 
