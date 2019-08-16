@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_easyrefresh/material_footer.dart';
+
 import "./common_component/banner.dart";
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,8 +10,12 @@ import '../config/static_assets.dart';
 import "package:url_launcher/url_launcher.dart";
 
 // 上拉加载更多
-import 'package:flutter_easyrefresh/easy_refresh.dart';
+// import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/material_footer.dart';
+
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+// import 'package:flutter_easyrefresh/bezier_circle_header.dart'; //如果要使用炫酷的样式需要引入，不同的样式引入不同的文件，详见官方api
+// import 'package:flutter_easyrefresh/bezier_bounce_footer.dart'; //如果要使用炫酷的样式需要引入，不同的样式引入不同的文件，
 
 class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
@@ -33,11 +39,15 @@ class _HomePageState extends State<HomePage>
           preferredSize: Size.fromHeight(50.0)),
       body: EasyRefresh(
         onLoad: () async {
-          setState(() {
-            data.addAll([1]);
+          await Future.delayed(Duration(seconds: 2), () {
+            setState(() {
+              data.addAll([1, 2, 3, 4, 5, 6]);
+            });
           });
         },
-        footer: MaterialFooter(),
+        footer: MaterialFooter(
+
+        ),
         child: ListView(
           children: <Widget>[
             MySwiper(swiperDataList), // 轮播图
