@@ -23,17 +23,17 @@ class _GoodsDetailState extends State<GoodsDetail> {
             appBar: AppBar(
               title: Text(goodsInfo.goodInfo.goodsName),
             ),
-            body: Column(
+            body: ListView(
               // height: ScreenUtil.getInstance().setHeight(height),
               children: <Widget>[
                 TopImage(goodsInfo.goodInfo.image1),
                 TopInfo(
-                  goodsInfo.goodInfo.goodsName,
-                  goodsInfo.goodInfo.goodsSerialNumber,
-                  goodsInfo.goodInfo.presentPrice,
-                  goodsInfo.goodInfo.presentPrice
-                ),
-                Promise()
+                    goodsInfo.goodInfo.goodsName,
+                    goodsInfo.goodInfo.goodsSerialNumber,
+                    goodsInfo.goodInfo.presentPrice,
+                    goodsInfo.goodInfo.presentPrice),
+                Promise(),
+                DescAndComments()
               ],
             ),
           );
@@ -87,7 +87,7 @@ class TopInfo extends StatelessWidget {
   final String goodsId;
   final double nowPrice;
   final double oldprice;
-  TopInfo(this.title,this.goodsId,this.nowPrice,this.oldprice);
+  TopInfo(this.title, this.goodsId, this.nowPrice, this.oldprice);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -103,27 +103,23 @@ class TopInfo extends StatelessWidget {
             style: TextStyle(color: Colors.black, fontSize: 18),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 6,bottom: 6),
+            padding: EdgeInsets.only(top: 6, bottom: 6),
             child: Text("编号:$goodsId"),
           ),
           Row(
             children: <Widget>[
               Text(
                 "￥$nowPrice",
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 20
-                ),
+                style: TextStyle(color: Colors.red, fontSize: 20),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Text("市场价:"),
               ),
-              Text("￥$oldprice",
+              Text(
+                "￥$oldprice",
                 style: TextStyle(
-                  decoration: TextDecoration.lineThrough,
-                  color: Colors.grey
-                ),
+                    decoration: TextDecoration.lineThrough, color: Colors.grey),
               )
             ],
           )
@@ -132,8 +128,6 @@ class TopInfo extends StatelessWidget {
     );
   }
 }
-
-
 
 // 保证组件
 
@@ -144,13 +138,155 @@ class Promise extends StatelessWidget {
       padding: EdgeInsets.only(left: 20),
       alignment: Alignment.centerLeft,
       height: ScreenUtil.getInstance().setHeight(100),
-      margin: EdgeInsets.only(top: 10,bottom: 10),
-      color:Colors.white,
-      child: Text("说明:>急速送达>正品保证",
-        style: TextStyle(
-          fontSize: 18,
-          color: Colors.pink
-        ),
+      margin: EdgeInsets.only(top: 10, bottom: 10),
+      color: Colors.white,
+      child: Text(
+        "说明 : > 急速送达 > 正品保证",
+        style: TextStyle(fontSize: 18, color: Colors.pink),
+      ),
+    );
+  }
+}
+
+// 详情和评论页面
+
+class DescAndComments extends StatefulWidget {
+  @override
+  _DescAndCommentsState createState() => _DescAndCommentsState();
+}
+
+class _DescAndCommentsState extends State<DescAndComments>
+    with SingleTickerProviderStateMixin {
+  TabController _mycontroller;
+  @override
+  void initState() {
+    _mycontroller = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height - 80,
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 40,
+            child: TabBar(
+              labelColor: Colors.black,
+              unselectedLabelColor:Colors.black38,
+              indicatorSize: TabBarIndicatorSize.label,
+              controller: _mycontroller,
+              tabs: <Widget>[
+                Text(
+                  "商品详情",
+                  style: TextStyle(height: 2),
+                ),
+                Text("评论列表")
+              ],
+            ),
+          ),
+          Container(
+            height: 563.1,
+            child: TabBarView(
+              controller: _mycontroller,
+              children: <Widget>[
+                ListView(
+                  children: <Widget>[
+                    Container(
+                      height: 100,
+                      color: Colors.pink,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.red,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.blue,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.yellow,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.pink,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.red,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.blue,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.yellow,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.pink,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.red,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.blue,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.yellow,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.pink,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.red,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.blue,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.yellow,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.pink,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.red,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.blue,
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.yellow,
+                    ),
+                  ],
+                ),
+                ListView(
+                  children: <Widget>[
+                    Container(
+                      height: 10000,
+                      color: Colors.blue,
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
