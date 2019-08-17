@@ -32,7 +32,8 @@ class _GoodsDetailState extends State<GoodsDetail> {
                   goodsInfo.goodInfo.goodsSerialNumber,
                   goodsInfo.goodInfo.presentPrice,
                   goodsInfo.goodInfo.presentPrice
-                )
+                ),
+                Promise()
               ],
             ),
           );
@@ -86,7 +87,7 @@ class TopInfo extends StatelessWidget {
   final String goodsId;
   final double nowPrice;
   final double oldprice;
-  TopInfo(this.title,this.goodsId,this.nowPrice,this.oldprice)
+  TopInfo(this.title,this.goodsId,this.nowPrice,this.oldprice);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -127,6 +128,29 @@ class TopInfo extends StatelessWidget {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+
+
+// 保证组件
+
+class Promise extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 20),
+      alignment: Alignment.centerLeft,
+      height: ScreenUtil.getInstance().setHeight(100),
+      margin: EdgeInsets.only(top: 10,bottom: 10),
+      color:Colors.white,
+      child: Text("说明:>急速送达>正品保证",
+        style: TextStyle(
+          fontSize: 18,
+          color: Colors.pink
+        ),
       ),
     );
   }
