@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../config/static_assets.dart';
 
 import "package:url_launcher/url_launcher.dart";
+import './goodsDetail.dart';
 
 // 上拉加载更多
 // import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -45,9 +46,7 @@ class _HomePageState extends State<HomePage>
             });
           });
         },
-        footer: MaterialFooter(
-
-        ),
+        footer: MaterialFooter(),
         child: ListView(
           children: <Widget>[
             MySwiper(swiperDataList), // 轮播图
@@ -414,15 +413,20 @@ class HotProduct extends StatelessWidget {
   HotProduct(this.hotData) : super();
   @override
   Widget _item(BuildContext context) {
-    return Container(
-      width: ScreenUtil.getInstance().setWidth(372),
-      height: ScreenUtil.getInstance().setWidth(375),
-      margin: EdgeInsets.only(bottom: 3),
-      child: Image.asset(
-        "images/hot1.PNG",
-        fit: BoxFit.fill,
+    return InkWell(
+      onTap:(){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>new GoodsDetail()));
+      },
+      child: Container(
+        width: ScreenUtil.getInstance().setWidth(372),
+        height: ScreenUtil.getInstance().setWidth(375),
+        margin: EdgeInsets.only(bottom: 3),
+        child: Image.asset(
+          "images/hot1.PNG",
+          fit: BoxFit.fill,
+        ),
+        // child: null,
       ),
-      // child: null,
     );
   }
 
