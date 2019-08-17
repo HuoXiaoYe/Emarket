@@ -27,6 +27,12 @@ class _GoodsDetailState extends State<GoodsDetail> {
               // height: ScreenUtil.getInstance().setHeight(height),
               children: <Widget>[
                 TopImage(goodsInfo.goodInfo.image1),
+                TopInfo(
+                  goodsInfo.goodInfo.goodsName,
+                  goodsInfo.goodInfo.goodsSerialNumber,
+                  goodsInfo.goodInfo.presentPrice,
+                  goodsInfo.goodInfo.presentPrice
+                )
               ],
             ),
           );
@@ -44,7 +50,7 @@ class _GoodsDetailState extends State<GoodsDetail> {
     );
   }
 
-  Future _getGoodsInfo(context) async{
+  Future _getGoodsInfo(context) async {
     await request(servicePath['goodsdetail']).then((val) {
       GoodsDetailModel info = GoodsDetailModel.fromJson(val);
       setState(() {
@@ -56,7 +62,6 @@ class _GoodsDetailState extends State<GoodsDetail> {
   }
 }
 
-
 // 顶部图片区域
 
 class TopImage extends StatelessWidget {
@@ -65,9 +70,64 @@ class TopImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        width: ScreenUtil.getInstance().setWidth(740),
+        height: ScreenUtil.getInstance().setWidth(440),
+        child: Image.network(
+          image,
+          fit: BoxFit.fill,
+        ));
+  }
+}
+
+// 头部信息组件
+
+class TopInfo extends StatelessWidget {
+  final String title;
+  final String goodsId;
+  final double nowPrice;
+  final double oldprice;
+  TopInfo(this.title,this.goodsId,this.nowPrice,this.oldprice)
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      alignment: Alignment.topLeft,
       width: ScreenUtil.getInstance().setWidth(740),
-      height: ScreenUtil.getInstance().setWidth(440),
-      child: Image.network(image,fit: BoxFit.fill,)
+      padding: EdgeInsets.only(left: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: TextStyle(color: Colors.black, fontSize: 18),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 6,bottom: 6),
+            child: Text("编号:$goodsId"),
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "￥$nowPrice",
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 20
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Text("市场价:"),
+              ),
+              Text("￥$oldprice",
+                style: TextStyle(
+                  decoration: TextDecoration.lineThrough,
+                  color: Colors.grey
+                ),
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }
