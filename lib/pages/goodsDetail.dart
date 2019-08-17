@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../dio/getData.dart';
 import '../config/service_url.dart';
 import '../model/GoodsModel.dart';
-import 'dart:convert';
 
 
 class GoodsDetail extends StatefulWidget {
@@ -16,7 +15,7 @@ class _GoodsDetailState extends State<GoodsDetail> {
   Widget build(BuildContext context) {
     _getGoodsInfo();
     return Container(
-      child:Text("goodsInfo")
+      child:Text(goodsInfo.goodInfo.goodsId)
     );
   }
 
@@ -26,11 +25,11 @@ class _GoodsDetailState extends State<GoodsDetail> {
       // print(val['data']['goodInfo']['amount']);
       GoodsDetailModel info = GoodsDetailModel.fromJson(val);
       
-      
-      // print(info.data.goodInfo.isOnline);
+      print("=======================");
+      print(val);
+      print("=======================");
       setState(() {
         goodsInfo = info.data;
-        print(info.data.goodInfo.isOnline);
       });
     });
   }
