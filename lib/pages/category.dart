@@ -9,6 +9,7 @@ import "../config/service_url.dart";
 import '../config/static_assets.dart';
 import '../model/categoryModel.dart';
 
+
 class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -156,11 +157,3 @@ class _RightChildCategoryState extends State<RightChildCategory> {
     );
   }
 }
-
-/*
-ListView.builder(
-        itemCount: bxMallSubDto.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => _rightChildCategoryItem(index),
-      )
-*/
