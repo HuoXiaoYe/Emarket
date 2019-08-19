@@ -80,6 +80,8 @@ const noNameData = [
   "images/c5.PNG",
 ];
 
+
+
 List detailImg = [
   "https://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081109_5060.jpg",
   "https://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081109_1063.jpg",
