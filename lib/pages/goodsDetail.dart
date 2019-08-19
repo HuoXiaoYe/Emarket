@@ -23,17 +23,25 @@ class _GoodsDetailState extends State<GoodsDetail> {
             appBar: AppBar(
               title: Text(goodsInfo.goodInfo.goodsName),
             ),
-            body: ListView(
-              // height: ScreenUtil.getInstance().setHeight(height),
+            body: Stack(
               children: <Widget>[
-                TopImage(goodsInfo.goodInfo.image1),
-                TopInfo(
-                    goodsInfo.goodInfo.goodsName,
-                    goodsInfo.goodInfo.goodsSerialNumber,
-                    goodsInfo.goodInfo.presentPrice,
-                    goodsInfo.goodInfo.presentPrice),
-                Promise(),
-                DescAndComments()
+                ListView(
+                  // height: ScreenUtil.getInstance().setHeight(height),
+                  children: <Widget>[
+                    TopImage(goodsInfo.goodInfo.image1),
+                    TopInfo(
+                        goodsInfo.goodInfo.goodsName,
+                        goodsInfo.goodInfo.goodsSerialNumber,
+                        goodsInfo.goodInfo.presentPrice,
+                        goodsInfo.goodInfo.presentPrice),
+                    Promise(),
+                    DescAndComments(),
+                    Container(
+                      height: 70,
+                    )
+                  ],
+                ),
+                MyBottomBar()
               ],
             ),
           );
@@ -174,7 +182,7 @@ class _DescAndCommentsState extends State<DescAndComments>
             height: 40,
             child: TabBar(
               labelColor: Colors.black,
-              unselectedLabelColor:Colors.black38,
+              unselectedLabelColor: Colors.black38,
               indicatorSize: TabBarIndicatorSize.label,
               controller: _mycontroller,
               tabs: <Widget>[
@@ -194,88 +202,26 @@ class _DescAndCommentsState extends State<DescAndComments>
                 ListView(
                   children: <Widget>[
                     Container(
-                      height: 100,
-                      color: Colors.pink,
+                      child: Image.network("https://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081109_5060.jpg"),
                     ),
                     Container(
-                      height: 100,
-                      color: Colors.red,
+                      child: Image.network("https://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081109_1063.jpg"),
                     ),
                     Container(
-                      height: 100,
-                      color: Colors.blue,
+                      child: Image.network("https://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081110_8029.jpg"),
+                    ),
+                     Container(
+                      child: Image.network("http://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081110_1074.jpg"),
+                    ),
+                     Container(
+                      child: Image.network("http://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081110_8439.jpg"),
                     ),
                     Container(
-                      height: 100,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.pink,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.blue,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.pink,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.blue,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.pink,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.blue,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.pink,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.blue,
-                    ),
-                    Container(
-                      height: 100,
-                      color: Colors.yellow,
+                      child: Image.network("http://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081110_6800.jpg"),
                     ),
                   ],
                 ),
-                ListView(
+                ListView( // 评论组件
                   children: <Widget>[
                     Container(
                       height: 10000,
@@ -287,6 +233,30 @@ class _DescAndCommentsState extends State<DescAndComments>
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+
+
+
+// 加入购物车 立即购买组件
+class MyBottomBar extends StatefulWidget {
+  @override
+  _MyBottomBarState createState() => _MyBottomBarState();
+}
+
+class _MyBottomBarState extends State<MyBottomBar> {
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      child: Container(
+        width: ScreenUtil.getInstance().setWidth(750),
+        height: 70,
+        color: Colors.white,
       ),
     );
   }

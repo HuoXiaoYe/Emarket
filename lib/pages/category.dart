@@ -47,6 +47,8 @@ class _LeftCategoryState extends State<LeftCategory> {
       CategoryModel catagoryList = CategoryModel.fromJson(response);
       setState(() {
         categoryList = catagoryList.data;
+
+        // categoryList = response['data'];
       });
     });
   }
