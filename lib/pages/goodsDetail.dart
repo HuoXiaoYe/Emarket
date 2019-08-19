@@ -170,7 +170,7 @@ class _DescAndCommentsState extends State<DescAndComments>
     super.initState();
   }
 
-  Widget _imgItem(item){
+  Widget _imgItem(item) {
     return Container(
       child: Image.network(item),
     );
@@ -204,9 +204,9 @@ class _DescAndCommentsState extends State<DescAndComments>
               controller: _mycontroller,
               children: <Widget>[
                 ListView(
-                  children: detailImg.map((item)=>_imgItem(item)).toList()
-                ),
-                ListView( // 评论组件
+                    children: detailImg.map((item) => _imgItem(item)).toList()),
+                ListView(
+                  // 评论组件
                   children: <Widget>[
                     Container(
                       height: 10000,
@@ -223,9 +223,6 @@ class _DescAndCommentsState extends State<DescAndComments>
   }
 }
 
-
-
-
 // 加入购物车 立即购买组件
 class MyBottomBar extends StatefulWidget {
   @override
@@ -240,8 +237,41 @@ class _MyBottomBarState extends State<MyBottomBar> {
       left: 0,
       child: Container(
         width: ScreenUtil.getInstance().setWidth(750),
-        height: 70,
+        height: 40,
         color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            InkWell(
+              onTap: () {},
+              child: Container(
+                width: 100,
+                child: Icon(Icons.shopping_cart,color: Colors.red,),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                
+                alignment: Alignment.center,
+                child: Text("加入购物车",style: TextStyle(color: Colors.white)),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  border: Border(
+                    right: BorderSide(width: 0.5,color: Colors.white)
+                  )
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                alignment: Alignment.center,
+                child: Text("立即购买",style: TextStyle(color: Colors.white),),
+                color: Colors.red,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
