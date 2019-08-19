@@ -3,6 +3,7 @@ import '../dio/getData.dart';
 import '../config/service_url.dart';
 import '../model/GoodsModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "../config/static_assets.dart";
 
 class GoodsDetail extends StatefulWidget {
   @override
@@ -36,9 +37,6 @@ class _GoodsDetailState extends State<GoodsDetail> {
                         goodsInfo.goodInfo.presentPrice),
                     Promise(),
                     DescAndComments(),
-                    Container(
-                      height: 70,
-                    )
                   ],
                 ),
                 MyBottomBar()
@@ -172,6 +170,12 @@ class _DescAndCommentsState extends State<DescAndComments>
     super.initState();
   }
 
+  Widget _imgItem(item){
+    return Container(
+      child: Image.network(item),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -200,26 +204,7 @@ class _DescAndCommentsState extends State<DescAndComments>
               controller: _mycontroller,
               children: <Widget>[
                 ListView(
-                  children: <Widget>[
-                    Container(
-                      child: Image.network("https://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081109_5060.jpg"),
-                    ),
-                    Container(
-                      child: Image.network("https://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081109_1063.jpg"),
-                    ),
-                    Container(
-                      child: Image.network("https://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081110_8029.jpg"),
-                    ),
-                     Container(
-                      child: Image.network("http://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081110_1074.jpg"),
-                    ),
-                     Container(
-                      child: Image.network("http://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081110_8439.jpg"),
-                    ),
-                    Container(
-                      child: Image.network("http://images.baixingliangfan.cn/shopGoodsDetailImg/20171224/20171224081110_6800.jpg"),
-                    ),
-                  ],
+                  children: detailImg.map((item)=>_imgItem(item)).toList()
                 ),
                 ListView( // 评论组件
                   children: <Widget>[
