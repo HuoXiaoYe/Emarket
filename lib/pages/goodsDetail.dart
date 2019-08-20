@@ -4,6 +4,8 @@ import '../config/service_url.dart';
 import '../model/GoodsModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import "../config/static_assets.dart";
+import '../provider/cart.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class GoodsDetail extends StatefulWidget {
   @override
@@ -16,44 +18,47 @@ class _GoodsDetailState extends State<GoodsDetail> {
   @override
   Widget build(BuildContext context) {
     _getGoodsInfo(context);
-    return FutureBuilder(
-      future: _getGoodsInfo(context),
-      builder: (context, snapData) {
-        if (hasData) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(goodsInfo.goodInfo.goodsName),
-            ),
-            body: Stack(
-              children: <Widget>[
-                ListView(
-                  // height: ScreenUtil.getInstance().setHeight(height),
-                  children: <Widget>[
-                    TopImage(goodsInfo.goodInfo.image1),
-                    TopInfo(
-                        goodsInfo.goodInfo.goodsName,
-                        goodsInfo.goodInfo.goodsSerialNumber,
-                        goodsInfo.goodInfo.presentPrice,
-                        goodsInfo.goodInfo.presentPrice),
-                    Promise(),
-                    DescAndComments(),
-                  ],
-                ),
-                MyBottomBar()
-              ],
-            ),
-          );
-        } else {
-          return Scaffold(
-              appBar: AppBar(),
-              body: Center(
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.red,
-                  valueColor: AlwaysStoppedAnimation(Colors.green),
-                ),
-              ));
-        }
-      },
+    return ScopedModel<CartProvider>(
+      model: CartProvider(),
+      child: FutureBuilder(
+        future: _getGoodsInfo(context),
+        builder: (context, snapData) {
+          if (hasData) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(goodsInfo.goodInfo.goodsName),
+              ),
+              body: Stack(
+                children: <Widget>[
+                  ListView(
+                    // height: ScreenUtil.getInstance().setHeight(height),
+                    children: <Widget>[
+                      TopImage(goodsInfo.goodInfo.image1),
+                      TopInfo(
+                          goodsInfo.goodInfo.goodsName,
+                          goodsInfo.goodInfo.goodsSerialNumber,
+                          goodsInfo.goodInfo.presentPrice,
+                          goodsInfo.goodInfo.presentPrice),
+                      Promise(),
+                      DescAndComments(),
+                    ],
+                  ),
+                  MyBottomBar()
+                ],
+              ),
+            );
+          } else {
+            return Scaffold(
+                appBar: AppBar(),
+                body: Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.red,
+                    valueColor: AlwaysStoppedAnimation(Colors.green),
+                  ),
+                ));
+          }
+        },
+      ),
     );
   }
 
@@ -247,26 +252,40 @@ class _MyBottomBarState extends State<MyBottomBar> {
               onTap: () {},
               child: Container(
                 width: 100,
-                child: Icon(Icons.shopping_cart,color: Colors.red,),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                
-                alignment: Alignment.center,
-                child: Text("加入购物车",style: TextStyle(color: Colors.white)),
-                decoration: BoxDecoration(
+                child: Icon(
+                  Icons.shopping_cart,
                   color: Colors.red,
-                  border: Border(
-                    right: BorderSide(width: 0.5,color: Colors.white)
-                  )
                 ),
               ),
             ),
             Expanded(
+              child: ScopedModelDescendant<CartProvider>(
+                builder: (context, child, model) {
+                  return InkWell(
+                    onTap: () {
+                      model.save("111111", "可乐", 1, 10, "image03.jpg");
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      child:
+                          Text("加入购物车", style: TextStyle(color: Colors.white)),
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          border: Border(
+                              right:
+                                  BorderSide(width: 0.5, color: Colors.white))),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Expanded(
               child: Container(
                 alignment: Alignment.center,
-                child: Text("立即购买",style: TextStyle(color: Colors.white),),
+                child: Text(
+                  "立即购买",
+                  style: TextStyle(color: Colors.white),
+                ),
                 color: Colors.red,
               ),
             )
