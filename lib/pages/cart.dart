@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import "package:flutter/material.dart";
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -53,7 +55,7 @@ class _CartState extends State<Cart> {
 
   _addGoods() async {
     SharedPreferences goods = await SharedPreferences.getInstance();
-    goodsList.add("小米8");
+    goodsList.add("小米9");
     goods.setStringList("goods", goodsList);
     setState(() {
       goodsList = goods.getStringList("goods");
