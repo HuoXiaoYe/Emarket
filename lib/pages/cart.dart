@@ -47,8 +47,20 @@ class _CartState extends State<Cart> {
             ),
           ),
           Container( // 商品价格和删除按钮
+          // alignment: Alignment.topCenter,
             margin: EdgeInsets.only(top: 10),
             width: ScreenUtil.getInstance().setWidth(120),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Text("￥4.50"),
+                InkWell(
+                  onTap: (){},
+                  child: Icon(Icons.delete_forever,size: 36,color: Colors.black26,),
+                )
+              ],
+            ),
           )
         ],
       ),
