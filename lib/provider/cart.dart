@@ -39,4 +39,15 @@ class CartProvider extends Model {
     _goodsList = tempList;
     notifyListeners();
   }
+
+  remove() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.remove("cartInfo");
+    prefs.getString("cartInfo") == null
+        ? _goodsList = []
+        : prefs.remove("cartInfo");
+    print("删除数据");
+    _goodsList = [];
+    notifyListeners();
+  }
 }

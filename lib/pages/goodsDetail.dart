@@ -280,14 +280,22 @@ class _MyBottomBarState extends State<MyBottomBar> {
               ),
             ),
             Expanded(
-              child: Container(
-                alignment: Alignment.center,
-                child: Text(
-                  "立即购买",
-                  style: TextStyle(color: Colors.white),
-                ),
-                color: Colors.red,
-              ),
+              child: ScopedModelDescendant<CartProvider>(
+                  builder: (context, child, model) {
+                return InkWell(
+                  onTap: () {
+                    model.remove();
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "立即购买",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: Colors.red,
+                  ),
+                );
+              }),
             )
           ],
         ),
