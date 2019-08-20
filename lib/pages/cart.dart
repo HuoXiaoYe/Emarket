@@ -67,6 +67,13 @@ class _CartState extends State<Cart> {
     );
   }
 
+  Widget BottomArea(){
+    return Container(
+      height: 60,
+      color: Colors.red,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScopedModel<CartProvider>(
@@ -77,6 +84,12 @@ class _CartState extends State<Cart> {
             ListView.builder(
               itemCount: 3,
               itemBuilder: (context, index) => _cartItem(),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: BottomArea(),
             )
           ],
         ),
