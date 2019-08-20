@@ -12,8 +12,8 @@ class _CartState extends State<Cart> {
   Widget _cartItem() {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.fromLTRB(3, 5, 10, 20),
-      height: ScreenUtil.getInstance().setHeight(200),
+      padding: EdgeInsets.fromLTRB(3, 15, 10, 20),
+      height: ScreenUtil.getInstance().setHeight(220),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(width: 1, color: Colors.grey))),
       child: Row(
@@ -21,6 +21,7 @@ class _CartState extends State<Cart> {
           Container(
             // 左侧选择按钮
             child: Checkbox(
+              tristate: true,
               value: true,
               activeColor: Colors.pink,
               onChanged: (bool val) {},
@@ -32,17 +33,22 @@ class _CartState extends State<Cart> {
             padding: EdgeInsets.all(3),
             child: Image.network(
                 "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566313374600&di=6522586356bdaf2a7c3813c4de8824ea&imgtype=0&src=http%3A%2F%2Fimg05.jdzj.com%2Foledit%2FUploadFile%2Fnews2014%2Fimage%2F20140228%2F20140228115735233523.jpg"),
-            decoration:
-                BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(width: 1, color: Colors.grey)),
           ),
           Container(
+            alignment: Alignment.centerLeft,
             //商品价格和数量
-            width: ScreenUtil.getInstance().setWidth(380),
-            margin: EdgeInsets.only(left: 10,top: 10),
-            // color: Colors.red,
+            width: ScreenUtil.getInstance().setWidth(350),
+            margin: EdgeInsets.only(top: 10,left: 10),
             child: Column(
               children: <Widget>[Text("青岛啤酒450ml(易拉罐装)")],
             ),
+          ),
+          Container( // 商品价格和删除按钮
+            margin: EdgeInsets.only(top: 10),
+            width: ScreenUtil.getInstance().setWidth(120),
           )
         ],
       ),
