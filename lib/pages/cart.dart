@@ -9,7 +9,7 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  List<bool> isCHeckedarr = [true,true,true];
+  List<bool> isCHeckedarr = [true, true, true];
   Widget _cartItem(index) {
     return Container(
       alignment: Alignment.centerLeft,
@@ -26,7 +26,7 @@ class _CartState extends State<Cart> {
               activeColor: Colors.pink,
               onChanged: (bool val) {
                 setState(() {
-                 isCHeckedarr[index] = val; 
+                  isCHeckedarr[index] = val;
                 });
               },
             ),
@@ -45,13 +45,28 @@ class _CartState extends State<Cart> {
             alignment: Alignment.centerLeft,
             //商品价格和数量
             width: ScreenUtil.getInstance().setWidth(350),
-            margin: EdgeInsets.only(top: 10,left: 10),
+            margin: EdgeInsets.only(top: 10, left: 10),
             child: Column(
-              children: <Widget>[Text("青岛啤酒450ml(易拉罐装)")],
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Text("青岛啤酒450ml(易拉罐装)"),
+                Container(
+                  width: 100,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1,color: Colors.black12),
+                    borderRadius: BorderRadius.circular(4)
+                  ),
+                  // color: Colors.red,
+                  
+                )
+              ],
             ),
           ),
-          Container( // 商品价格和删除按钮
-          // alignment: Alignment.topCenter,
+          Container(
+            // 商品价格和删除按钮
+            // alignment: Alignment.topCenter,
             margin: EdgeInsets.only(top: 10),
             width: ScreenUtil.getInstance().setWidth(120),
             child: Column(
@@ -60,8 +75,12 @@ class _CartState extends State<Cart> {
               children: <Widget>[
                 Text("￥4.50"),
                 InkWell(
-                  onTap: (){},
-                  child: Icon(Icons.delete_forever,size: 36,color: Colors.black26,),
+                  onTap: () {},
+                  child: Icon(
+                    Icons.delete_forever,
+                    size: 36,
+                    color: Colors.black26,
+                  ),
                 )
               ],
             ),
@@ -71,7 +90,7 @@ class _CartState extends State<Cart> {
     );
   }
 
-  Widget bottomArea(){
+  Widget bottomArea() {
     return Container(
       alignment: Alignment.centerLeft,
       height: 60,
@@ -80,11 +99,12 @@ class _CartState extends State<Cart> {
         children: <Widget>[
           Checkbox(
             activeColor: Colors.pink,
-            onChanged: (val){},
+            onChanged: (val) {},
             value: true,
           ),
           Text("全选"),
-          Expanded( // 商品总价区域
+          Expanded(
+            // 商品总价区域
             child: Container(
               margin: EdgeInsets.only(top: 10),
               alignment: Alignment.centerRight,
@@ -94,37 +114,36 @@ class _CartState extends State<Cart> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Text("合计：",
-                        style: TextStyle(
-                          fontSize: 14
-                        ),
+                      Text(
+                        "合计：",
+                        style: TextStyle(fontSize: 14),
                       ),
-                      Text("￥126.90",style:TextStyle(
-                        color: Colors.pink,
-                        fontSize: 14
-                      ))
+                      Text("￥126.90",
+                          style: TextStyle(color: Colors.pink, fontSize: 14))
                     ],
                   ),
-                  Text("满10元免配送费，预购免配送费",
-                    style: TextStyle(
-                      fontSize: 12
-                    ),
+                  Text(
+                    "满10元免配送费，预购免配送费",
+                    style: TextStyle(fontSize: 12),
                   )
                 ],
               ),
             ),
           ),
-          InkWell( // 结算按钮
-            onTap: (){},
+          InkWell(
+            // 结算按钮
+            onTap: () {},
             child: Container(
               margin: EdgeInsets.all(10),
               width: 80,
               height: 60,
               alignment: Alignment.center,
-              decoration: BoxDecoration(color: Colors.pink,
-                borderRadius: BorderRadius.circular(5)
+              decoration: BoxDecoration(
+                  color: Colors.pink, borderRadius: BorderRadius.circular(5)),
+              child: Text(
+                "结算(3)",
+                style: TextStyle(color: Colors.white),
               ),
-              child: Text("结算(3)"),
             ),
           )
         ],
