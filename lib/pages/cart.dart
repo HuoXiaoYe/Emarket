@@ -73,8 +73,27 @@ class _CartState extends State<Cart> {
 
   Widget bottomArea(){
     return Container(
+      alignment: Alignment.centerLeft,
       height: 60,
-      color: Colors.red,
+      color: Colors.white,
+      child: Row(
+        children: <Widget>[
+          Checkbox(
+            activeColor: Colors.pink,
+            onChanged: (val){},
+            value: true,
+          ),
+          Text("全选"),
+          Expanded(
+            child: Container(
+              color: Colors.red,
+              child: Column(
+                
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
