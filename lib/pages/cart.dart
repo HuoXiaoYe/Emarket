@@ -84,13 +84,38 @@ class _CartState extends State<Cart> {
             value: true,
           ),
           Text("全选"),
-          Expanded(
+          Expanded( // 商品总价区域
             child: Container(
-              color: Colors.red,
+              margin: EdgeInsets.only(top: 10),
+              alignment: Alignment.centerRight,
               child: Column(
-                
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text("合计：",
+                        style: TextStyle(
+                          fontSize: 14
+                        ),
+                      ),
+                      Text("￥126.90",style:TextStyle(
+                        color: Colors.pink,
+                        fontSize: 14
+                      ))
+                    ],
+                  ),
+                  Text("满10元免配送费，预购免配送费",
+                    style: TextStyle(
+                      fontSize: 12
+                    ),
+                  )
+                ],
               ),
             ),
+          ),
+          InkWell( // 结算按钮
+
           )
         ],
       ),
