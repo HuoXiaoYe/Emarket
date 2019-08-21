@@ -52,14 +52,41 @@ class _CartState extends State<Cart> {
               children: <Widget>[
                 Text("青岛啤酒450ml(易拉罐装)"),
                 Container(
-                  width: 100,
+                  width: 102,
                   height: 30,
                   decoration: BoxDecoration(
-                    border: Border.all(width: 1,color: Colors.black12),
-                    borderRadius: BorderRadius.circular(4)
+                      border: Border.all(width: 1, color: Colors.black12),
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment.center,
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            border: Border(
+                                right: BorderSide(
+                                    width: 1, color: Colors.black12))),
+                        child: Text("-"),
+                      ),
+                      Container(
+                        width: 40,
+                        height: 30,
+                        alignment: Alignment.center,
+                        child: Text("2"),
+                      ),
+                      Container(
+                        width: 30,
+                        height: 30,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            border: Border(
+                                left: BorderSide(
+                                    width: 1, color: Colors.black12))),
+                        child: Text("+"),
+                      )
+                    ],
                   ),
-                  // color: Colors.red,
-                  
                 )
               ],
             ),
