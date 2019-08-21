@@ -9,7 +9,8 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  Widget _cartItem() {
+  List<bool> isCHeckedarr = [true,true,true];
+  Widget _cartItem(index) {
     return Container(
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.fromLTRB(3, 15, 10, 20),
@@ -21,10 +22,13 @@ class _CartState extends State<Cart> {
           Container(
             // 左侧选择按钮
             child: Checkbox(
-              tristate: true,
-              value: true,
+              value: isCHeckedarr[index],
               activeColor: Colors.pink,
-              onChanged: (bool val) {},
+              onChanged: (bool val) {
+                setState(() {
+                 isCHeckedarr[index] = val; 
+                });
+              },
             ),
           ),
           Container(
@@ -83,7 +87,7 @@ class _CartState extends State<Cart> {
           children: <Widget>[
             ListView.builder(
               itemCount: 3,
-              itemBuilder: (context, index) => _cartItem(),
+              itemBuilder: (context, index) => _cartItem(index),
             ),
             Positioned(
               bottom: 0,
