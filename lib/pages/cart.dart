@@ -71,7 +71,7 @@ class _CartState extends State<Cart> {
     );
   }
 
-  Widget BottomArea(){
+  Widget bottomArea(){
     return Container(
       height: 60,
       color: Colors.red,
@@ -93,7 +93,7 @@ class _CartState extends State<Cart> {
               bottom: 0,
               left: 0,
               right: 0,
-              child: BottomArea(),
+              child: bottomArea(),
             )
           ],
         ),
