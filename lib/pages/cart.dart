@@ -115,7 +115,17 @@ class _CartState extends State<Cart> {
             ),
           ),
           InkWell( // 结算按钮
-
+            onTap: (){},
+            child: Container(
+              margin: EdgeInsets.all(10),
+              width: 80,
+              height: 60,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(color: Colors.pink,
+                borderRadius: BorderRadius.circular(5)
+              ),
+              child: Text("结算(3)"),
+            ),
           )
         ],
       ),
