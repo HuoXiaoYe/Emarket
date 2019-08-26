@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 
-
 class Member extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,16 +16,36 @@ class Member extends StatelessWidget {
   }
 }
 
+// 头像 https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4259300811,497831842&fm=26&gp=0.jpg
+// 背景图片 https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566834551762&di=12042c3b68d693cc2ba2f46d549b2f2d&imgtype=0&src=http%3A%2F%2Fpic1.16pic.com%2F00%2F51%2F59%2F16pic_5159490_b.jpg
+
 class MyAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      decoration: BoxDecoration(
-        color: Colors.blue,
-        image: DecorationImage(image: NetworkImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566833438075&di=0968bb8dacfd85de73f4de846892f785&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F7Po3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F37d12f2eb9389b5088b262058335e5dde7116e1c.jpg"),
-          fit: BoxFit.fill
-        )
+
+      child: Stack(
+        alignment:AlignmentDirectional.center,
+        children: <Widget>[
+          
+          Image.network(
+              "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566834551762&di=12042c3b68d693cc2ba2f46d549b2f2d&imgtype=0&src=http%3A%2F%2Fpic1.16pic.com%2F00%2F51%2F59%2F16pic_5159490_b.jpg"),
+          // Positioned()
+          Container(
+            
+            height: 100,
+            width: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              border: Border.all(width: 2,color: Colors.white)
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.network("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4259300811,497831842&fm=26&gp=0.jpg"),
+            ),
+          )
+        ],
       ),
     );
   }
