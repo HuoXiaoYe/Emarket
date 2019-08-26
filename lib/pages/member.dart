@@ -8,7 +8,8 @@ class Member extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
-            MyAvatar() // 顶部头像部分
+            MyAvatar(), // 顶部头像部分
+            MyOrder(), // 我的订单部分
           ],
         ),
       ),
@@ -57,3 +58,38 @@ class MyAvatar extends StatelessWidget {
     );
   }
 }
+
+
+class Split extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 0,
+    );
+  }
+}
+
+class MyOrder extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      // color: Colors.red,
+      child: Column(
+        children: <Widget>[
+          Row( // 我的订单栏
+            children: <Widget>[
+
+            ],
+          ),
+          Row( // 四大图标
+            children: <Widget>[
+
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
