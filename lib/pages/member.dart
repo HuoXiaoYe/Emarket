@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Member extends StatelessWidget {
   @override
@@ -47,10 +48,9 @@ class MyAvatar extends StatelessWidget {
           ),
           Positioned(
             top: 210,
-            child: Text("杭州吴亦凡",
-              style: TextStyle(
-                fontSize: 18
-              ),
+            child: Text(
+              "杭州吴亦凡",
+              style: TextStyle(fontSize: 18),
             ),
           )
         ],
@@ -58,7 +58,6 @@ class MyAvatar extends StatelessWidget {
     );
   }
 }
-
 
 class Split extends StatelessWidget {
   @override
@@ -77,14 +76,65 @@ class MyOrder extends StatelessWidget {
       // color: Colors.red,
       child: Column(
         children: <Widget>[
-          Row( // 我的订单栏
+          Row(
+            // 我的订单栏
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-
+              Container(
+                width: ScreenUtil.getInstance().setWidth(100),
+                child: Icon(
+                  Icons.book,
+                  color: Colors.grey,
+                ),
+              ),
+              Container(
+                width: ScreenUtil.getInstance().setWidth(550),
+                child: Text(
+                  "我的订单",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              Container(
+                width: ScreenUtil.getInstance().setWidth(100),
+                child: Icon(
+                  Icons.navigate_next,
+                  size: 36,
+                ),
+              )
             ],
           ),
-          Row( // 四大图标
+          Divider(),
+          Row(
+            // 四大图标
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-
+              InkWell(
+                onTap: () {},
+                child: Column(
+                  children: <Widget>[Icon(Icons.attach_money), Text("待付款")],
+                ),
+              ),
+              InkWell(
+                onTap: () {},
+                child: Column(
+                  children: <Widget>[Icon(Icons.train), Text("待发货")],
+                ),
+              ),
+              InkWell(
+                onTap: () {},
+                child: Column(
+                  children: <Widget>[Icon(Icons.get_app), Text("待收货")],
+                ),
+              ),
+              InkWell(
+                onTap: () {},
+                child: Column(
+                  children: <Widget>[
+                    Icon(Icons.record_voice_over),
+                    Text("待评价",),
+                  ],
+                ),
+              )
             ],
           )
         ],
@@ -92,4 +142,3 @@ class MyOrder extends StatelessWidget {
     );
   }
 }
-
