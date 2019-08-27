@@ -68,7 +68,6 @@ class Split extends StatelessWidget {
   }
 }
 
-
 // 我的订单区域
 class MyOrder extends StatelessWidget {
   @override
@@ -133,7 +132,9 @@ class MyOrder extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Icon(Icons.record_voice_over),
-                    Text("待评价",),
+                    Text(
+                      "待评价",
+                    ),
                   ],
                 ),
               )
@@ -145,4 +146,52 @@ class MyOrder extends StatelessWidget {
   }
 }
 
+// 其他组件
+class OtherArea extends StatelessWidget {
+  final List items;
+  OtherArea(this.items);
 
+  Widget _item(index) {
+    return Container(
+      child: Row(
+        // 我的订单栏
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Container(
+            width: ScreenUtil.getInstance().setWidth(100),
+            child: Icon(
+              Icons.book,
+              color: Colors.grey,
+            ),
+          ),
+          Container(
+            width: ScreenUtil.getInstance().setWidth(550),
+            child: Text(
+              items[index],
+              style: TextStyle(fontSize: 18),
+            ),
+          ),
+          Container(
+            width: ScreenUtil.getInstance().setWidth(100),
+            child: Icon(
+              Icons.navigate_next,
+              size: 36,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return _item(index);
+        },
+      ),
+    );
+  }
+}
