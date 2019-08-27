@@ -7,10 +7,13 @@ class Member extends StatelessWidget {
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
-        child: Column(
+        child: ListView(
+          padding:EdgeInsets.only(top: 0),
           children: <Widget>[
             MyAvatar(), // 顶部头像部分
             MyOrder(), // 我的订单部分
+            OtherArea(["领取优惠卷","已领取优惠券","地址管理"]),
+            OtherArea(["领取优惠卷","已领取优惠券","地址管理"]),
           ],
         ),
       ),
@@ -151,8 +154,15 @@ class OtherArea extends StatelessWidget {
   final List items;
   OtherArea(this.items);
 
-  Widget _item(index) {
+  Widget _item(item) {
     return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: Colors.black12,width: 1)
+        ),
+        color: Colors.white
+      ),
       child: Row(
         // 我的订单栏
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -167,7 +177,7 @@ class OtherArea extends StatelessWidget {
           Container(
             width: ScreenUtil.getInstance().setWidth(550),
             child: Text(
-              items[index],
+              item,
               style: TextStyle(fontSize: 18),
             ),
           ),
@@ -186,11 +196,9 @@ class OtherArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return _item(index);
-        },
+      margin: EdgeInsets.only(top: 30),
+      child: Column(
+        children: items.map((item)=>_item(item)).toList(),
       ),
     );
   }
