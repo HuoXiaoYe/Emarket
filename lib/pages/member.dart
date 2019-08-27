@@ -13,7 +13,7 @@ class Member extends StatelessWidget {
             MyAvatar(), // 顶部头像部分
             MyOrder(), // 我的订单部分
             OtherArea(["领取优惠卷","已领取优惠券","地址管理"]),
-            OtherArea(["领取优惠卷","已领取优惠券","地址管理"]),
+            OtherArea(["客服电话","关于商城"]),
           ],
         ),
       ),
