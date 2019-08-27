@@ -76,8 +76,6 @@ class MyOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
-      // color: Colors.red,
       child: Column(
         children: <Widget>[
           Row(
@@ -108,6 +106,9 @@ class MyOrder extends StatelessWidget {
             ],
           ),
           Divider(),
+          Container(
+            height: 15,
+          ),
           Row(
             // 四大图标
             mainAxisAlignment: MainAxisAlignment.spaceAround,
